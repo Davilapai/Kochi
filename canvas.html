@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Canvas - Kochi</title>
+    <meta name="description" content="Modelo de negocio Canvas de Kochi - Transformando citas en experiencias memorables">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .canvas-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #B8D4E3 0%, #F4C2C2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .canvas-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .canvas-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .canvas-content {
+            padding: 80px 0;
+            background: #FFF8F0;
+        }
+
+        .canvas-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .canvas-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid;
+            width: 100%;
+        }
+
+        .canvas-block:nth-child(1) { border-left-color: #F4C2C2; }
+        .canvas-block:nth-child(2) { border-left-color: #B8D4E3; }
+        .canvas-block:nth-child(3) { border-left-color: #D4C4A8; }
+        .canvas-block:nth-child(4) { border-left-color: #E8A5A5; }
+        .canvas-block:nth-child(5) { border-left-color: #7BA7BC; }
+        .canvas-block:nth-child(6) { border-left-color: #F4C2C2; }
+        .canvas-block:nth-child(7) { border-left-color: #B8D4E3; }
+        .canvas-block:nth-child(8) { border-left-color: #D4C4A8; }
+        .canvas-block:nth-child(9) { border-left-color: #E8A5A5; }
+
+        .canvas-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 115, 85, 0.2);
+        }
+
+        .canvas-block h2 {
+            color: #8B7355;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .canvas-block .icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            min-height: 50px;
+            background: linear-gradient(135deg, #B8D4E3, #F4C2C2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .canvas-block h3 {
+            color: #7BA7BC;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .canvas-block p {
+            color: #8B7355;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-block ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .canvas-block ul li {
+            color: #8B7355;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .canvas-block ul li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #F4C2C2;
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #8B7355;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.1);
+        }
+
+        .back-button:hover {
+            background: #F4C2C2;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 194, 194, 0.4);
+        }
+
+        .intro-section {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            color: #8B7355;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            color: #8B7355;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .canvas-hero h1 {
+                font-size: 2rem;
+            }
+
+            .canvas-block {
+                padding: 1.5rem;
+            }
+
+            .canvas-block h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-otter"></i>
+                </div>
+                <h2>Kochi</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#ideas" class="nav-link">Ideas para Citas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#quienes-somos" class="nav-link">Quienes somos</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Canvas -->
+    <section class="canvas-hero">
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> Modelo Canvas de Kochi</h1>
+            <p>Descubre cómo transformamos la planeación de citas en experiencias memorables</p>
+        </div>
+    </section>
+
+    <!-- Contenido Canvas -->
+    <section class="canvas-content">
+        <div class="container">
+            <div class="intro-section">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </a>
+            </div>
+
+            <div class="canvas-grid">
+                <!-- 1. Propuesta de Valor -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        Propuesta de Valor
+                    </h2>
+                    <p>Kochi es una aplicación que transforma la planeación de citas en experiencias memorables. Su propuesta no es "sugerir lugares", sino crear momentos únicos personalizados según el presupuesto, ubicación y estilo de cada pareja.</p>
+                    
+                    <h3>Responde a tres ejes centrales:</h3>
+                    <ul>
+                        <li><strong>Necesidades:</strong> muchas parejas no saben qué hacer en una cita o cómo planear algo diferente con el dinero disponible.</li>
+                        <li><strong>Frustraciones:</strong> la monotonía, el estrés de decidir, o la decepción de experiencias pasadas.</li>
+                        <li><strong>Alegrías:</strong> la app ofrece ideas originales, álbumes digitales donde las parejas guardan sus recuerdos y recomendaciones automáticas basadas en sus gustos.</li>
+                    </ul>
+                    
+                    <p>Kochi genera valor emocional: convierte el simple acto de salir en una experiencia significativa y compartible. Además, transmite confianza y cuidado al proteger datos, fomentar relaciones sanas y promover un disfrute ético del tiempo juntos.</p>
+                </div>
+
+                <!-- 2. Segmentos de Clientes -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-users"></i></span>
+                        Segmentos de Clientes
+                    </h2>
+                    <p>El nicho principal son jóvenes y adultos entre 18 y 35 años, activos en redes sociales, que valoran la innovación, la conexión emocional y el equilibrio entre costo y experiencia.</p>
+                    
+                    <h3>Subsegmentos:</h3>
+                    <ul>
+                        <li>Parejas jóvenes con presupuestos medios o bajos que buscan ideas diferentes.</li>
+                        <li>Parejas consolidadas que desean mantener la chispa y registrar sus momentos.</li>
+                        <li>Usuarios individuales que buscan planear citas futuras o sorprender a alguien.</li>
+                        <li>Empresas locales (restaurantes, cines, cafés, experiencias urbanas) que quieren publicitar sus servicios dentro de Kochi.</li>
+                    </ul>
+                    
+                    <p>El modelo considera que los usuarios compran más por impulso y emoción que por racionalidad; por eso, cada interacción debe transmitir "confía en mí, te haré vivir algo especial".</p>
+                </div>
+
+                <!-- 3. Canales de Distribución -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-share-alt"></i></span>
+                        Canales de Distribución
+                    </h2>
+                    <p>Kochi utilizará una estrategia omnicanal con cuatro canales principales basados en el embudo AIDA (Atención, Interés, Deseo, Acción):</p>
+                    
+                    <ul>
+                        <li><strong>Redes sociales</strong> (Instagram, TikTok y Facebook Ads): contenido visual aspiracional y microvideos que despierten deseo e impulsividad.</li>
+                        <li><strong>Marketing de influencers y alianzas locales:</strong> experiencias en restaurantes o lugares que se convierten en vitrinas reales de la app.</li>
+                        <li><strong>App Store y Google Play:</strong> canal principal de descarga, con estrategia ASO (App Store Optimization).</li>
+                        <li><strong>Email marketing y notificaciones push:</strong> para reactivar usuarios, fidelizar y ofrecer nuevas experiencias personalizadas.</li>
+                    </ul>
+                    
+                    <p>En todas las etapas del funnel se prioriza la generación de confianza y la experiencia emocional, no solo la venta.</p>
+                </div>
+
+                <!-- 4. Relación con los Clientes -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-handshake"></i></span>
+                        Relación con los Clientes
+                    </h2>
+                    <p>La relación se centrará en acompañar y cuidar al usuario, construyendo una comunidad de experiencias.</p>
+                    
+                    <ul>
+                        <li><strong>Fidelización:</strong> sistema de recompensas por subir fotos o calificar citas ("Kochi Points").</li>
+                        <li><strong>Personalización:</strong> recomendaciones automáticas según historial y emociones registradas.</li>
+                        <li><strong>Atención humana y empática:</strong> soporte 24/7 basado en lenguaje afectivo y no utilitarista.</li>
+                        <li><strong>Comunidades Kochi:</strong> espacio para compartir experiencias o retos ("La cita del mes"), fortaleciendo la conexión emocional con la marca.</li>
+                    </ul>
+                    
+                    <p>La meta no es solo que el usuario vuelva, sino que sienta que Kochi crece con su relación.</p>
+                </div>
+
+                <!-- 5. Fuentes de Ingreso -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                        Fuentes de Ingreso
+                    </h2>
+                    <p>Kochi contará con al menos cuatro vías de monetización:</p>
+                    
+                    <ul>
+                        <li><strong>Publicidad geolocalizada:</strong> restaurantes, bares y espacios pagan por aparecer en recomendaciones locales.</li>
+                        <li><strong>Suscripción Premium:</strong> acceso a ideas exclusivas, filtros personalizados, álbumes ilimitados y experiencias sorpresa.</li>
+                        <li><strong>Anuncios dentro de la aplicación:</strong> espacios publicitarios no invasivos en el feed y en las recomendaciones, cuidadosamente diseñados para integrarse con la experiencia visual y emocional del usuario. Se priorizarán marcas afines al concepto de bienestar, ocio y relaciones.</li>
+                        <li><strong>Venta de datos anónimos de tendencias (ética del cuidado):</strong> estadísticas sobre hábitos de ocio y consumo compartidas responsablemente con empresas asociadas.</li>
+                    </ul>
+                    
+                    <p>Con el tiempo, se puede incluir merchandising digital, como álbumes físicos o kits de experiencias.</p>
+                </div>
+
+                <!-- 6. Recursos Clave -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-cubes"></i></span>
+                        Recursos Clave
+                    </h2>
+                    <ul>
+                        <li><strong>Recursos materiales:</strong> servidores, licencias de software, infraestructura tecnológica y bases de datos seguras.</li>
+                        <li><strong>Recursos humanos:</strong> desarrolladores, diseñadores UX/UI, equipo de marketing emocional, analistas de datos y equipo de atención empática.</li>
+                        <li><strong>Recursos financieros:</strong> capital semilla, inversión ángel o crowdfunding inicial para desarrollo y expansión.</li>
+                        <li><strong>Recursos intelectuales:</strong> algoritmos de recomendación, identidad de marca, derechos del software y contenido propio.</li>
+                    </ul>
+                    
+                    <p>Todos estos recursos deben sostener una cultura interna basada en la ética del cuidado, donde las decisiones no se tomen solo por rentabilidad, sino por bienestar colectivo.</p>
+                </div>
+
+                <!-- 7. Actividades Clave -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-tasks"></i></span>
+                        Actividades Clave
+                    </h2>
+                    <ul>
+                        <li>Diseño, desarrollo y mantenimiento de la app.</li>
+                        <li>Creación de experiencias nuevas y contenido emocional atractivo.</li>
+                        <li>Gestión de alianzas con comercios locales.</li>
+                        <li>Estrategias de marketing y funnel AIDA continuo.</li>
+                        <li>Análisis de datos para personalizar y fidelizar.</li>
+                        <li>Garantizar la protección y confidencialidad de la información de los usuarios.</li>
+                    </ul>
+                    
+                    <p>El corazón de la operación es generar experiencias auténticas y sostenibles.</p>
+                </div>
+
+                <!-- 8. Socios Clave -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-link"></i></span>
+                        Socios Clave
+                    </h2>
+                    <ul>
+                        <li><strong>Restaurantes, bares, cines y centros recreativos:</strong> aliados estratégicos para crear experiencias reales.</li>
+                        <li><strong>Influencers y creadores de contenido:</strong> difusión y validación social.</li>
+                        <li><strong>Empresas de desarrollo tecnológico:</strong> soporte y escalabilidad.</li>
+                        <li><strong>Entidades financieras o inversionistas éticos:</strong> sostenimiento y crecimiento responsable.</li>
+                        <li><strong>Organizaciones promotoras de bienestar y relaciones sanas:</strong> refuerzo del enfoque ético y de cuidado emocional.</li>
+                    </ul>
+                    
+                    <p>Estos socios fortalecen la credibilidad, el alcance y la sostenibilidad del proyecto.</p>
+                </div>
+
+                <!-- 9. Estructura de Costos -->
+                <div class="canvas-block">
+                    <h2>
+                        <span class="icon"><i class="fas fa-calculator"></i></span>
+                        Estructura de Costos
+                    </h2>
+                    <p>Principales costos fijos y variables:</p>
+                    
+                    <ul>
+                        <li>Desarrollo tecnológico y mantenimiento de la app.</li>
+                        <li>Campañas publicitarias digitales (AIDA).</li>
+                        <li>Sueldos del equipo humano.</li>
+                        <li>Alianzas, comisiones y licencias.</li>
+                        <li>Infraestructura tecnológica y seguridad de datos.</li>
+                        <li>Creación de contenido y experiencias.</li>
+                    </ul>
+                    
+                    <p>El modelo debe establecer un punto de equilibrio sostenible entre inversión en experiencia y retorno en fidelización. El valor no está en vender, sino en construir comunidad y emoción.</p>
+                </div>
+            </div>
+
+            <div class="intro-section">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-otter"></i>
+                        </div>
+                        <h3>Kochi</h3>
+                    </div>
+                    <p>Conecta corazones, descubre tu cita ideal y crea momentos inolvidables que recordarás por siempre</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/kochi.app/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Descubre</h4>
+                    <ul>
+                        <li><a href="index.html#ideas">Ideas para Citas</a></li>
+                        <li><a href="index.html#quienes-somos">Quiénes Somos</a></li>
+                        <li><a href="proximamente.html">Historias de Éxito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentos</h4>
+                    <ul>
+                        <li><a href="canvas.html">Modelo Canvas</a></li>
+                        <li><a href="proximamente.html">Plan de Negocios</a></li>
+                        <li><a href="proximamente.html">Documentación</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kochi, donde el amor se siente de verdad.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
