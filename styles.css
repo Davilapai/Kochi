@@ -543,6 +543,225 @@ body {
 html {
     scroll-padding-top: 80px;
 }
+
+/* Modal de Documentos */
+.documents-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    overflow-y: auto;
+}
+
+.documents-modal-content {
+    background-color: var(--crema);
+    margin: 3% auto;
+    padding: 3rem;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 1000px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(139, 115, 85, 0.3);
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.documents-close {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--cafe-oscuro);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(139, 115, 85, 0.1);
+}
+
+.documents-close:hover {
+    background: var(--rosita);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.documents-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.documents-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--azul-pastel), var(--rosita));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(184, 212, 227, 0.4);
+}
+
+.documents-header h2 {
+    color: var(--cafe-oscuro);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.documents-header p {
+    color: var(--cafe-oscuro);
+    opacity: 0.8;
+    font-size: 1.1rem;
+}
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.document-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(139, 115, 85, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--cafe-oscuro);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.document-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--azul-pastel), var(--rosita));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.document-card:hover::before {
+    transform: scaleX(1);
+}
+
+.document-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(139, 115, 85, 0.2);
+    border-color: var(--azul-pastel);
+}
+
+.document-card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.document-card.disabled:hover {
+    transform: none;
+    box-shadow: 0 5px 20px rgba(139, 115, 85, 0.1);
+    border-color: transparent;
+}
+
+.doc-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--azul-pastel), var(--rosita));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.document-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--cafe-oscuro);
+    font-weight: 600;
+}
+
+.document-card p {
+    color: var(--cafe-oscuro);
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.doc-badge {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.doc-badge.pdf {
+    background: var(--rosita);
+    color: white;
+}
+
+.doc-badge.web {
+    background: var(--azul-pastel);
+    color: white;
+}
+
+.doc-badge.soon {
+    background: var(--cafe-pastel);
+    color: var(--cafe-oscuro);
+}
+
+@media (max-width: 768px) {
+    .documents-modal-content {
+        margin: 5% auto;
+        padding: 2rem;
+        width: 95%;
+    }
+
+    .documents-header h2 {
+        font-size: 2rem;
+    }
+
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .documents-close {
+        right: 15px;
+        top: 15px;
+        font-size: 28px;
+    }
+}
  
 
 /* Ajuste de badges únicos */

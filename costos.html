@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructura de Costos - Kochi</title>
+    <meta name="description" content="Detalle profesional de la estructura de costos del modelo de negocio Kochi">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Hero */
+        .hero-costos {padding:130px 0 70px;background:radial-gradient(circle at 30% 30%,#B8D4E3 0%,#7BA7BC 45%,#F4C2C2 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+        .hero-costos:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));mix-blend-mode:overlay}
+        .hero-costos h1{font-size:3.1rem;margin-bottom:1.1rem;font-weight:700;letter-spacing:.5px}
+        .hero-costos p{font-size:1.15rem;opacity:.94;max-width:950px;margin:0 auto 1.6rem}
+        .hero-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+        .hero-actions a{background:#fff;color:#7BA7BC;padding:.75rem 1.15rem;border-radius:14px;font-size:.75rem;font-weight:600;text-decoration:none;letter-spacing:.6px;box-shadow:0 4px 14px rgba(0,0,0,.15);transition:.35s}
+        .hero-actions a:hover{background:#F4C2C2;color:#fff;transform:translateY(-3px)}
+        .floating-nav{position:fixed;top:18px;right:18px;z-index:9999;display:flex;gap:.65rem}
+        .floating-nav a{background:#fff;color:#8B7355;text-decoration:none;padding:.55rem .9rem;border-radius:11px;font-size:.65rem;font-weight:600;letter-spacing:.5px;box-shadow:0 6px 18px rgba(139,115,85,.25);display:flex;align-items:center;gap:.4rem;transition:.3s}
+        .floating-nav a:hover{background:#F4C2C2;color:#fff;transform:translateY(-2px)}
+        /* Sections */
+        .section{padding:75px 0;background:#FFF8F0;position:relative}
+        .section.alt{background:#FFFFFF}
+        .section h2.section-title{color:#8B7355;font-size:2.1rem;margin:0 0 1.7rem;font-weight:700;letter-spacing:.5px;text-align:left}
+        .section-lead{font-size:.95rem;color:#8B7355;max-width:820px;line-height:1.6;margin-bottom:1.8rem}
+        /* Grid Cards */
+        .cost-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:2rem}
+        .card{background:#fff;padding:1.85rem 1.85rem 2.1rem;border-radius:22px;box-shadow:0 10px 28px -4px rgba(139,115,85,.18);position:relative;display:flex;flex-direction:column;gap:.85rem;border:1px solid #E4D5C4}
+        .card:after{content:"";position:absolute;inset:0;border-radius:22px;padding:2px;background:linear-gradient(135deg,rgba(184,212,227,.9),rgba(244,194,194,.9));-webkit-mask:linear-gradient(#fff 0 0, #fff 0 0) content-box,linear-gradient(#fff 0 0,#fff 0 0);mask:linear-gradient(#fff 0 0, #fff 0 0) content-box,linear-gradient(#fff 0 0,#fff 0 0);-webkit-mask-composite:x;mask-composite:exclude;opacity:0;transition:.4s}
+        .card:hover:after{opacity:.3}
+        .card:hover{transform:translateY(-6px);box-shadow:0 16px 46px -6px rgba(139,115,85,.32)}
+        .card h3{margin:0;font-size:1.3rem;color:#8B7355;display:flex;align-items:center;gap:.65rem;font-weight:600}
+        .badge{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .9rem;border-radius:16px;font-size:.65rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;background:#B8D4E3;color:#fff;box-shadow:0 4px 10px rgba(184,212,227,.5)}
+        .badge.alt{background:#F4C2C2;box-shadow:0 4px 10px rgba(244,194,194,.5)}
+        .badge.gradient{background:linear-gradient(135deg,#B8D4E3,#F4C2C2)}
+        .rationale{font-size:.7rem;letter-spacing:.5px;font-weight:600;color:#7BA7BC;text-transform:uppercase;margin-top:.25rem}
+        .mini-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:.82rem}
+        .mini-table th{background:#7BA7BC;color:#fff;font-weight:600;font-size:.7rem;padding:.55rem .65rem;border-radius:8px 8px 0 0}
+        .mini-table td{background:#F9F3EC;padding:.55rem .65rem;border-radius:8px}
+        .mini-table tbody tr:hover td{background:#F1E9DF}
+        .impact-note{font-size:.65rem;color:#8B7355;opacity:.85;line-height:1.4}
+        .tag-row{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.35rem}
+        .tag{background:#E9F1F6;color:#416579;font-size:.62rem;padding:.4rem .75rem;border-radius:13px;font-weight:600;letter-spacing:.45px}
+        /* KPI */
+        .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;margin:2.4rem 0}
+        .kpi{background:#fff;border-radius:18px;padding:1.05rem 1.25rem;box-shadow:0 8px 26px -4px rgba(139,115,85,.22);display:flex;flex-direction:column;gap:.4rem;position:relative;overflow:hidden}
+        .kpi:before{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(184,212,227,.35),rgba(244,194,194,.35));opacity:.15}
+        .kpi span.label{font-size:.65rem;font-weight:700;letter-spacing:.6px;color:#8B7355;text-transform:uppercase}
+        .kpi span.value{font-size:1.5rem;font-weight:700;color:#F4C2C2;letter-spacing:.5px}
+        .kpi small{font-size:.6rem;color:#7BA7BC;font-weight:600}
+        /* Charts */
+        .chart-block{background:#fff;border-radius:28px;padding:2.2rem 2.2rem 2.6rem;margin-bottom:2.8rem;box-shadow:0 14px 46px -6px rgba(139,115,85,.25);position:relative;overflow:hidden}
+        .chart-block h3{margin-top:0;font-size:1.25rem;color:#8B7355;font-weight:700;display:flex;align-items:center;gap:.65rem}
+        .chart-insight{margin-top:1rem;font-size:.78rem;line-height:1.55;color:#416579;background:#E9F1F6;padding:.9rem 1rem;border-radius:14px;border-left:5px solid #7BA7BC}
+        .chart-insight strong{color:#8B7355}
+        .legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.9rem}
+        .legend span{display:flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:600;color:#8B7355;background:#F9F3EC;padding:.35rem .65rem;border-radius:10px}
+        .legend i{width:15px;height:15px;border-radius:4px;display:inline-block}
+        /* Scenarios */
+        .scenario-block{background:#fff;padding:2.2rem;border-radius:28px;box-shadow:0 14px 46px -6px rgba(139,115,85,.25);margin-top:2.8rem}
+        .scenario-block h3{margin-top:0;font-size:1.25rem;color:#8B7355;font-weight:700;display:flex;align-items:center;gap:.65rem}
+        .scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem;margin-top:1.5rem}
+        .scenario{background:#FFF8F0;border:1px solid #E6D8C8;border-radius:18px;padding:1rem 1rem 1.15rem;display:flex;flex-direction:column;gap:.45rem;position:relative;overflow:hidden}
+        .scenario:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,212,227,.25),rgba(244,194,194,.25));opacity:.15}
+        .scenario h4{margin:.1rem 0;font-size:.92rem;color:#8B7355;font-weight:700}
+        .scenario .num{font-size:1.15rem;font-weight:700;color:#F4C2C2}
+        .scenario small{font-size:.62rem;font-weight:600;color:#7BA7BC;letter-spacing:.5px}
+        /* Divider */
+        .divider{height:1px;width:100%;background:linear-gradient(90deg,#B8D4E3,#F4C2C2);margin:2.9rem 0;position:relative}
+        .divider:after{content:"";position:absolute;left:50%;top:50%;width:120px;height:8px;background:linear-gradient(90deg,#F4C2C2,#B8D4E3);border-radius:6px;transform:translate(-50%,-50%);filter:blur(3px);opacity:.4}
+        /* Navigation anchor list */
+        .anchor-menu{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.4rem 0 0}
+        .anchor-menu a{background:#fff;color:#7BA7BC;text-decoration:none;padding:.55rem .85rem;border-radius:12px;font-size:.6rem;font-weight:600;letter-spacing:.5px;box-shadow:0 4px 14px rgba(123,167,188,.25);transition:.3s}
+        .anchor-menu a:hover{background:#7BA7BC;color:#fff}
+        /* Accessibility focus */
+        a:focus-visible{outline:3px solid #F4C2C2;outline-offset:3px;border-radius:8px}
+        /* Responsive improvements */
+        @media(max-width:1100px){.hero-costos h1{font-size:2.6rem}.kpi span.value{font-size:1.35rem}.cost-grid{gap:1.6rem}}
+        @media(max-width:850px){.floating-nav{top:auto;bottom:14px;right:14px}.floating-nav a{font-size:.58rem;padding:.5rem .7rem}.hero-costos h1{font-size:2.25rem}.chart-block{padding:1.6rem 1.4rem 2rem}.scenario-block{padding:1.6rem}.card{padding:1.5rem 1.4rem 1.8rem}}
+        @media(max-width:560px){.anchor-menu a{flex:1 1 45%;text-align:center}.hero-actions a{font-size:.62rem}.kpi-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}}
+
+        /* Dark theme overrides */
+        body.dark{background:#0f1418;color:#eaeef2}
+        body.dark .section{background:#0f1418}
+        body.dark .section.alt{background:#0b1014}
+        body.dark .card, body.dark .kpi, body.dark .chart-block, body.dark .scenario-block{background:#121a21;color:#eaeef2;border-color:#2a3a46;box-shadow:0 12px 28px -6px rgba(0,0,0,.45)}
+        body.dark .legend span{background:#14202a;color:#cfe6f3}
+        body.dark .tag{background:#14202a;color:#8ec0d9}
+        body.dark .impact-note{color:#cbd5df}
+        body.dark .section-title{color:#eaeef2}
+        body.dark .rationale{color:#8ec0d9}
+        body.dark .hero-costos{background:radial-gradient(circle at 30% 30%,#173343 0%,#0f1418 60%,#3a2b30 100%)}
+        body.dark .floating-nav a{background:#121a21;color:#cbd5df}
+        body.dark .floating-nav a:hover{background:#1f2a33;color:#fff}
+        body.dark .mini-table th{background:#264352;color:#eaeef2}
+        body.dark .mini-table td{background:#18232c;color:#d9e6ef}
+        body.dark .chart-insight{background:#14202a;color:#cfe6f3;border-left-color:#264352}
+
+        /* Print stylesheet: fuerza modo claro y limpia fondos */
+        @media print{
+            @page{size:A4;margin:12mm}
+            .navbar,.footer,.floating-nav,.hero-actions,.anchor-menu{display:none !important}
+            body, .section, .section.alt{background:#fff !important;color:#000 !important}
+            .card, .kpi, .chart-block, .scenario-block{background:#fff !important;color:#000 !important;box-shadow:none !important;border-color:#ddd !important}
+            .hero-costos{background:#fff !important;color:#000 !important;padding:0 0 10px !important}
+            .legend span{background:#f4f4f4 !important;color:#333 !important}
+            .chart-block canvas{background:#fff !important}
+            .divider{margin:10mm 0}
+            .section{page-break-inside:avoid}
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación flotante -->
+    <div class="floating-nav">
+        <a href="#" id="toggleTheme"><i class="fas fa-moon"></i></a>
+        <a href="#" id="exportPDF"><i class="fas fa-file-pdf"></i> PDF</a>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon"><i class="fas fa-otter"></i></div>
+                <h2>Kochi</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="canvas.html" class="nav-link">Canvas</a></li>
+                <li class="nav-item"><a href="index.html#ideas" class="nav-link">Ideas</a></li>
+            </ul>
+            <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+        </div>
+    </nav>
+
+    
+    <section class="hero-costos" aria-labelledby="titulo-costos">
+        <div class="container">
+            <h1 id="titulo-costos"><i class="fas fa-calculator" aria-hidden="true"></i> Estructura de Costos Kochi</h1>
+            <p>Radiografía estratégica: qué invertimos, por qué y cómo se comporta al escalar. Optimizamos cada peso para reforzar conexión emocional y retención sostenible.</p>
+            <div class="hero-actions" aria-label="Acciones rápidas">
+                <a href="#graficos">Ver Gráficos</a>
+                <a href="#escenarios">Escenarios</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="resumen" aria-labelledby="resumen-titulo">
+        <div class="container">
+            <h2 class="section-title" id="resumen-titulo">Resumen Cuantitativo</h2>
+            <p class="section-lead">Indicadores clave para entender la tracción financiera inicial y los umbrales de sostenibilidad. El enfoque prioriza inversión en activos reutilizables (tecnología + contenido) sobre gastos inflacionarios.</p>
+            <div class="kpi-grid" aria-label="Indicadores financieros principales">
+                <div class="kpi" role="group" aria-label="Inversión MVP"><span class="label">Inversión MVP única</span><span class="value">$18M</span><small>Diseño + Backend + App base</small></div>
+                <div class="kpi" role="group" aria-label="Costo mensual base"><span class="label">Costo Mensual Base</span><span class="value">$11.9M</span><small>Operación mínima estable</small></div>
+                <div class="kpi" role="group" aria-label="Punto equilibrio"><span class="label">Punto Equilibrio</span><span class="value">1.450</span><small>Suscriptores / ticket $35K</small></div>
+                <div class="kpi" role="group" aria-label="Margen bruto"><span class="label">Margen Bruto Estimado</span><span class="value">62%</span><small>Freemium + eficiencia cloud</small></div>
+                <div class="kpi" role="group" aria-label="Capitalizable"><span class="label">Gasto Capitalizable</span><span class="value">68%</span><small>Crea activos reutilizables</small></div>
+                <div class="kpi" role="group" aria-label="CAC inicial"><span class="label">CAC Inicial Estimado</span><span class="value">$21K</span><small>Optimizable con referidos</small></div>
+            </div>
+            <p class="impact-note" aria-label="Nota metodológica">Metodología: se prioriza costos de creación de valor a largo plazo sobre costos de transacción. Escalamiento sub-lineal gracias a infraestructura compartida y automatización de soporte.</p>
+
+            <h2 class="section-title" id="categorias">Desglose por Categorías</h2>
+            <p class="section-lead">Cada categoría responde a un principio estratégico: <strong>Tecnología</strong> (escalabilidad), <strong>Personal</strong> (calidad emocional), <strong>Marketing</strong> (acelerar adopción), <strong>Operaciones híbridas</strong> (tangible memorable), <strong>Legal/Admin</strong> (confianza estructural) y <strong>Escalamiento</strong> (elasticidad de costos). Se muestra gasto y racional.</p>
+            <div class="cost-grid" aria-label="Desglose de categorías de costo">
+                <div class="card">
+                    <h3><span class="badge gradient"><i class="fas fa-server" aria-hidden="true"></i> Tecnología</span> Infraestructura & Desarrollo</h3>
+                    <span class="rationale">Base escalable + menor costo marginal</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Ítem</th><th>Tipo</th><th>Valor</th></tr></thead>
+                        <tbody>
+                            <tr><td>MVP (Diseño + Backend + App)</td><td>Único</td><td>$12.000.000</td></tr>
+                            <tr><td>Servidores / DB / CDN</td><td>Mensual</td><td>$1.200.000</td></tr>
+                            <tr><td>Licencias + Herramientas</td><td>Mensual</td><td>$400.000</td></tr>
+                            <tr><td>Seguridad / Backups</td><td>Mensual</td><td>$250.000</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row">
+                        <span class="tag">Escalable</span><span class="tag">Cloud</span><span class="tag">Automatizado</span>
+                    </div>
+                    <p class="impact-note">La inversión única reduce futuros tiempos de lanzamiento de features y disminuye fricción en experiencia de usuario, elevando retención y LTV.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="badge alt"><i class="fas fa-users-cog" aria-hidden="true"></i> Personal</span> Equipo Humano</h3>
+                    <span class="rationale">Calidad emocional + diferenciación</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Rol</th><th>Tipo</th><th>Mensual</th></tr></thead>
+                        <tbody>
+                            <tr><td>Desarrollador Full Stack</td><td>Fijo</td><td>$3.500.000</td></tr>
+                            <tr><td>Diseñador UX/UI (part-time)</td><td>Fijo</td><td>$1.800.000</td></tr>
+                            <tr><td>Psicólogo Asesor (horas)</td><td>Variable</td><td>$1.200.000</td></tr>
+                            <tr><td>Marketing / Community</td><td>Fijo</td><td>$2.400.000</td></tr>
+                            <tr><td>Soporte / Atención</td><td>Variable</td><td>$900.000</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row"><span class="tag">Empatía</span><span class="tag">Contenido</span><span class="tag">Escalamiento</span></div>
+                    <p class="impact-note">El componente humano crea confianza y reduce churn en momentos críticos (crisis emocional). Optimizable vía formación cruzada y base de conocimiento.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="badge"><i class="fas fa-bullhorn" aria-hidden="true"></i> Marketing</span> Adquisición & Retención</h3>
+                    <span class="rationale">Acelerar ciclo de adopción</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Canal</th><th>Tipo</th><th>Mensual</th></tr></thead>
+                        <tbody>
+                            <tr><td>Ads (Instagram / TikTok)</td><td>Variable</td><td>$2.000.000</td></tr>
+                            <tr><td>Influencers / Microcreadores</td><td>Variable</td><td>$1.000.000</td></tr>
+                            <tr><td>Email / Push / CRM</td><td>Fijo</td><td>$350.000</td></tr>
+                            <tr><td>Producción Contenido</td><td>Variable</td><td>$1.100.000</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row"><span class="tag">Funnel AIDA</span><span class="tag">Brand Love</span><span class="tag">Optimización</span></div>
+                    <p class="impact-note">Distribución balanceada entre performance y brand equity. Se busca reducir CAC a < $15K mediante referidos + UGC a mes 6.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="badge alt"><i class="fas fa-box" aria-hidden="true"></i> Operaciones</span> Kits & Experiencias</h3>
+                    <span class="rationale">Tangibilizar vínculo emocional</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Ítem</th><th>Tipo</th><th>Costo</th></tr></thead>
+                        <tbody>
+                            <tr><td>Kits románticos (unidad)</td><td>Variable</td><td>$35.000</td></tr>
+                            <tr><td>Logística / Envíos (promedio)</td><td>Variable</td><td>$12.000</td></tr>
+                            <tr><td>Taller presencial (organización)</td><td>Variable</td><td>$850.000</td></tr>
+                            <tr><td>Comisiones aliados (%)</td><td>Variable</td><td>8% ventas</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row"><span class="tag">Híbrido</span><span class="tag">Experiencial</span><span class="tag">Local</span></div>
+                    <p class="impact-note">La capa física incrementa percepción de valor y viralidad orgánica (stories) elevando referidos y tasa de recomendación.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="badge"><i class="fas fa-file-signature" aria-hidden="true"></i> Legal & Admin</span> Gestión & Compliance</h3>
+                    <span class="rationale">Confianza + escalabilidad ordenada</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Concepto</th><th>Tipo</th><th>Valor</th></tr></thead>
+                        <tbody>
+                            <tr><td>Registro marca / PI</td><td>Único</td><td>$1.000.000</td></tr>
+                            <tr><td>Contabilidad / Fiscal</td><td>Mensual</td><td>$600.000</td></tr>
+                            <tr><td>Políticas & Auditorías</td><td>Mensual</td><td>$250.000</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row"><span class="tag">Cumplimiento</span><span class="tag">Confianza</span></div>
+                    <p class="impact-note">Reduce riesgo reputacional y facilita entrada a alianzas corporativas o institucionales (talleres patrocinados).</p>
+                </div>
+                <div class="card">
+                    <h3><span class="badge alt"><i class="fas fa-chart-line" aria-hidden="true"></i> Escalamiento</span> Costos por Usuario</h3>
+                    <span class="rationale">Elasticidad y eficiencia progresiva</span>
+                    <table class="mini-table">
+                        <thead><tr><th>Concepto</th><th>Base</th><th>+ Cada 1K usuarios</th></tr></thead>
+                        <tbody>
+                            <tr><td>Infraestructura</td><td>$1.200.000</td><td>+$280.000</td></tr>
+                            <tr><td>Soporte</td><td>$900.000</td><td>+$350.000</td></tr>
+                            <tr><td>Datos / Analítica</td><td>$250.000</td><td>+$120.000</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tag-row"><span class="tag">Escala progresiva</span><span class="tag">Optimizable</span></div>
+                    <p class="impact-note">La optimización de procesos y automatización (chat asistido) reduce pendiente de soporte post mes 9.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section alt" id="principios" aria-labelledby="principios-titulo">
+        <div class="container">
+            <h2 class="section-title" id="principios-titulo">Principios Financieros</h2>
+            <p class="section-lead">La asignación de recursos sigue cinco principios rectores: <strong>Escalabilidad Técnica</strong> (evitar reescrituras), <strong>Diferenciación Emocional</strong> (contenido y humanos), <strong>Adquisición Balanceada</strong> (performance + marca), <strong>Elasticidad Operativa</strong> (costos variables solo cuando hay ingreso), y <strong>Riesgo Controlado</strong> (compliance y reputación). Esto preserva margen mientras se expande base de usuarios.</p>
+        </div>
+    </section>
+
+    <section class="section" id="graficos" aria-labelledby="graficos-titulo">
+        <div class="container">
+            <h2 class="section-title" id="graficos-titulo">Visualizaciones</h2>
+            <div class="chart-block" aria-labelledby="chart-dist">
+                <h3 id="chart-dist"><i class="fas fa-chart-pie" aria-hidden="true"></i> Distribución Proyectada Año 1</h3>
+                <canvas id="pieDistribucion" height="110"></canvas>
+                <div class="legend" id="legendPie"></div>
+                <div class="chart-insight"><strong>Insight:</strong> Personal y Tecnología concentran el 56% del año 1, lo cual es saludable para un producto en etapa de validación (prioriza retención y construcción de plataforma). Marketing se mantiene estratégico sin sobreapalancar el presupuesto inicial.</div>
+            </div>
+            <div class="chart-block" aria-labelledby="chart-fijos">
+                <h3 id="chart-fijos"><i class="fas fa-chart-bar" aria-hidden="true"></i> Costos Mensuales Fijos vs Variables</h3>
+                <canvas id="barCostos" height="110"></canvas>
+                <div class="chart-insight"><strong>Insight:</strong> Proporción fija controlada permite previsibilidad de flujo de caja. Variables ligados a crecimiento (ads, kits) preservan eficiencia si se reduce adquisición agresiva temporalmente.</div>
+            </div>
+            <div class="chart-block" aria-labelledby="chart-escala">
+                <h3 id="chart-escala"><i class="fas fa-chart-area" aria-hidden="true"></i> Escalamiento Infraestructura vs Usuarios</h3>
+                <canvas id="lineEscala" height="110"></canvas>
+                <div class="chart-insight"><strong>Insight:</strong> Curva sub-lineal sugiere que cada nuevo usuario reduce costo promedio de infraestructura. Soporte crece más rápido y se convierte en foco de automatización (chat asistido, FAQ dinámica).</div>
+            </div>
+            <div class="chart-block" aria-labelledby="chart-breakeven">
+                <h3 id="chart-breakeven"><i class="fas fa-chart-line" aria-hidden="true"></i> Proyección a Punto de Equilibrio</h3>
+                <canvas id="lineBreakeven" height="110"></canvas>
+                <div class="chart-insight"><strong>Insight:</strong> Alcanzar 1.450 suscriptores objetivo requeriría ritmo medio de +170 suscriptores/mes. Con referidos activos desde mes 4 y mejora de funnel, se reduce dependencia de ads pagados y mejora margen bruto adicional de 3–5 p.p.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="escenarios" aria-labelledby="escenarios-titulo">
+        <div class="container">
+            <h2 class="section-title" id="escenarios-titulo">Escenarios Financieros</h2>
+            <div class="scenario-block" aria-labelledby="escenarios-comparativa">
+                <h3 id="escenarios-comparativa"><i class="fas fa-rocket" aria-hidden="true"></i> Comparativa de Escenarios</h3>
+                <div class="scenario-grid">
+                    <div class="scenario">
+                        <h4>Conservador</h4>
+                        <span class="num">800 suscriptores</span>
+                        <small>Ingreso mensual aprox.</small>
+                        <strong style="color:#7BA7BC">$28.0M</strong>
+                        <span style="font-size:.65rem">Margen bruto: 48%</span>
+                    </div>
+                    <div class="scenario">
+                        <h4>Objetivo</h4>
+                        <span class="num">1.450 suscriptores</span>
+                        <small>Ingreso mensual aprox.</small>
+                        <strong style="color:#7BA7BC">$50.75M</strong>
+                        <span style="font-size:.65rem">Margen bruto: 62%</span>
+                    </div>
+                    <div class="scenario">
+                        <h4>Escalado</h4>
+                        <span class="num">3.000 suscriptores</span>
+                        <small>Ingreso mensual aprox.</small>
+                        <strong style="color:#7BA7BC">$105.0M</strong>
+                        <span style="font-size:.65rem">Margen bruto: 68%</span>
+                    </div>
+                    <div class="scenario">
+                        <h4>Híbrido + Kits</h4>
+                        <span class="num">2.000 suscriptores + 350 kits</span>
+                        <small>Ingreso mensual aprox.</small>
+                        <strong style="color:#7BA7BC">$86.25M</strong>
+                        <span style="font-size:.65rem">Margen bruto: 65%</span>
+                    </div>
+                </div>
+                <p style="font-size:.7rem;color:#8B7355;margin-top:1.4rem">Valores estimados con ticket medio $35K COP. Optimización de CAC (referidos, SEO, UGC) + mejoras de onboarding pueden incrementar margen bruto 3–7 p.p. en escenario objetivo.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo"><div class="logo-icon"><i class="fas fa-otter"></i></div><h3>Kochi</h3></div>
+                    <p>Cuidando relaciones con tecnología, empatía y creatividad.</p>
+                    <div class="social-links"><a href="https://www.instagram.com/kochi.app/" target="_blank"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-tiktok"></i></a></div>
+                </div>
+                <div class="footer-section">
+                    <h4>Explora</h4>
+                    <ul>
+                        <li><a href="index.html#ideas">Ideas para Citas</a></li>
+                        <li><a href="canvas.html">Canvas</a></li>
+                        <li><a href="costos.html">Estructura de Costos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentos</h4>
+                    <ul>
+                        <li><a href="canvas.html">Modelo Canvas</a></li>
+                        <li><a href="assets/Kochietica.pdf" target="_blank">Código de Ética</a></li>
+                        <li><a href="assets/Responsabilidad%20Social%20Empresarial.pdf" target="_blank">Responsabilidad Social</a></li>
+                        <li><a href="https://kochiapp.my.canva.site/" target="_blank">Propuesta de Valor</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Kochi. Construyendo conexiones auténticas.</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        // Utilidades
+        function legendHTML(labels, colors){return labels.map((l,i)=>`<span><i style=\"background:${colors[i]}\"></i>${l}</span>`).join('')} 
+        // Plugin texto central en donut
+        const centerTextPlugin={id:'centerTextPlugin',afterDraw(chart,args,opts){if(chart.config.type!=='doughnut')return;const {ctx,width,height}=chart;ctx.save();ctx.font='600 14px Inter';ctx.fillStyle='#8B7355';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Total 100%',width/2,height/2 -2);ctx.font='500 11px Inter';ctx.fillStyle='#7BA7BC';ctx.fillText('Distribución Estrategia',width/2,height/2 +16);ctx.restore();}};
+        Chart.register(centerTextPlugin);
+        // Donut Distribución Año 1
+        const pieCtx=document.getElementById('pieDistribucion');
+        const pieData={labels:['Personal','Tecnología','Marketing','Operaciones','Legal/Admin'],datasets:[{data:[34,22,20,16,8],backgroundColor:['#F4C2C2','#B8D4E3','#7BA7BC','#D4C4A8','#8B7355'],borderWidth:3,borderColor:'#fff'}]};
+        const pieChart=new Chart(pieCtx,{type:'doughnut',data:pieData,options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:(ctx)=>`${ctx.label}: ${ctx.raw}%`}}},cutout:'58%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'}}});
+        document.getElementById('legendPie').innerHTML=legendHTML(pieData.labels,pieData.datasets[0].backgroundColor);
+        // Barras Fijos vs Variables con línea total
+        const barCtx=document.getElementById('barCostos');
+        const labelsBar=['Tecnología','Personal','Marketing','Operaciones','Legal/Admin'];
+        const fijo=[1.85,5.3,0.35,0.0,0.85];
+        const variable=[0.25,2.1,4.45,1.75,0.25];
+        const total=fijo.map((v,i)=>+(v+variable[i]).toFixed(2));
+        const barChart=new Chart(barCtx,{type:'bar',data:{labels:labelsBar,datasets:[{label:'Fijo',data:fijo,backgroundColor:'rgba(184,212,227,.9)',borderRadius:6},{label:'Variable',data:variable,backgroundColor:'rgba(244,194,194,.9)',borderRadius:6},{type:'line',label:'Total',data:total,borderColor:'#8B7355',tension:.35,fill:false,borderWidth:2,pointBackgroundColor:'#8B7355',pointRadius:4}]},options:{responsive:true,plugins:{legend:{position:'bottom'},tooltip:{mode:'index',intersect:false,callbacks:{footer:(items)=>{const sum=items.reduce((a,i)=>a+i.parsed.y,0);return 'Total: '+sum.toFixed(2)+' M COP';}}}},interaction:{mode:'index',intersect:false},scales:{y:{title:{display:true,text:'Millones COP'},beginAtZero:true,grid:{color:'rgba(123,167,188,.15)'}},x:{grid:{display:false}}}}});
+        // Línea Escalamiento Infraestructura vs Soporte
+        const lineCtx=document.getElementById('lineEscala');
+        const usuarios=[500,1000,1500,2000,2500,3000];
+        const infraestructura=usuarios.map(u=>+(1.2+(u/1000)*0.28).toFixed(2));
+        const soporte=usuarios.map(u=>+(0.9+(u/1000)*0.35).toFixed(2));
+        const lineChart=new Chart(lineCtx,{type:'line',data:{labels:usuarios,datasets:[{label:'Infraestructura (M COP)',data:infraestructura,borderColor:'#7BA7BC',backgroundColor:'rgba(123,167,188,.25)',tension:.35,fill:true},{label:'Soporte (M COP)',data:soporte,borderColor:'#F4C2C2',backgroundColor:'rgba(244,194,194,.25)',tension:.35,fill:true}]},options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{title:(items)=>'Usuarios: '+items[0].label}}},scales:{y:{title:{display:true,text:'Millones COP'},grid:{color:'rgba(139,115,85,.15)'}},x:{grid:{display:false}}}}});
+        // Línea Breakeven proyección suscriptores
+        const breakevenCtx=document.getElementById('lineBreakeven');
+        const meses=['M1','M2','M3','M4','M5','M6','M7','M8','M9'];
+        const crecimientoBase=[120,260,410,585,780,960,1120,1290,1450];
+        const ritmoNecesario=meses.map((_,i)=>170*(i+1)); // ritmo lineal
+        const breakevenChart=new Chart(breakevenCtx,{type:'line',data:{labels:meses,datasets:[{label:'Proyección Objetivo',data:crecimientoBase,borderColor:'#7BA7BC',backgroundColor:'rgba(123,167,188,.25)',tension:.35,fill:true},{label:'Ritmo Lineal Teórico',data:ritmoNecesario,borderColor:'#F4C2C2',borderDash:[6,6],tension:.35,fill:false}]},options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:(ctx)=>ctx.dataset.label+': '+ctx.raw+' suscr.'}}},scales:{y:{title:{display:true,text:'Suscriptores'},beginAtZero:true},x:{grid:{display:false}}}}});
+
+        // Manejo de tema (claro/oscuro) + persistencia y sincronización con charts
+        const charts=[pieChart,barChart,lineChart,breakevenChart];
+        function setChartsTheme(dark){
+            Chart.defaults.color = dark ? '#eaeef2' : '#455a64';
+            charts.forEach(ch=>{
+                if(!ch?.options?.scales) return;
+                const y=ch.options.scales.y, x=ch.options.scales.x;
+                if(y){ y.grid = y.grid || {}; y.grid.color = dark? 'rgba(255,255,255,.15)':'rgba(139,115,85,.15)'; y.ticks = y.ticks || {}; y.ticks.color = dark? '#cfe6f3':'#455a64'; }
+                if(x){ x.grid = x.grid || {}; x.grid.color = dark? 'rgba(255,255,255,.08)':'rgba(0,0,0,0)'; x.ticks = x.ticks || {}; x.ticks.color = dark? '#cfe6f3':'#455a64'; }
+                ch.update('none');
+            });
+        }
+        function applyTheme(dark){
+            document.body.classList.toggle('dark', dark);
+            setChartsTheme(dark);
+            const tBtn=document.getElementById('toggleTheme').querySelector('i');
+            tBtn.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        const savedTheme = localStorage.getItem('themeCostos');
+        applyTheme(savedTheme === 'dark');
+        const toggleBtn = document.getElementById('toggleTheme');
+        if(toggleBtn){
+            toggleBtn.addEventListener('click', (e)=>{
+                e.preventDefault();
+                const dark = !document.body.classList.contains('dark');
+                localStorage.setItem('themeCostos', dark ? 'dark':'light');
+                applyTheme(dark);
+            });
+        }
+
+        // Exportar a PDF (imprimir)
+        const exportBtn = document.getElementById('exportPDF');
+        if(exportBtn){
+            exportBtn.addEventListener('click',(e)=>{
+                e.preventDefault();
+                window.print();
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

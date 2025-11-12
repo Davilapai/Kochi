@@ -164,6 +164,203 @@
             line-height: 1.8;
         }
 
+        /* Modal de Documentos */
+        .documents-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .documents-modal-content {
+            background-color: #FFF8F0;
+            margin: 3% auto;
+            padding: 3rem;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(139, 115, 85, 0.3);
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .documents-close {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #8B7355;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(139, 115, 85, 0.1);
+        }
+
+        .documents-close:hover {
+            background: #F4C2C2;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .documents-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .documents-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #B8D4E3, #F4C2C2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(184, 212, 227, 0.4);
+        }
+
+        .documents-header h2 {
+            color: #8B7355;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .documents-header p {
+            color: #8B7355;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .document-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(139, 115, 85, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #8B7355;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .document-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #B8D4E3, #F4C2C2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .document-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .document-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 115, 85, 0.2);
+            border-color: #B8D4E3;
+        }
+
+        .document-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .document-card.disabled:hover {
+            transform: none;
+            box-shadow: 0 5px 20px rgba(139, 115, 85, 0.1);
+            border-color: transparent;
+        }
+
+        .doc-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #B8D4E3, #F4C2C2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .document-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #8B7355;
+            font-weight: 600;
+        }
+
+        .document-card p {
+            color: #8B7355;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .doc-badge.pdf {
+            background: #F4C2C2;
+            color: white;
+        }
+
+        .doc-badge.web {
+            background: #B8D4E3;
+            color: white;
+        }
+
+        .doc-badge.soon {
+            background: #D4C4A8;
+            color: #8B7355;
+        }
+
         @media (max-width: 768px) {
             .canvas-hero h1 {
                 font-size: 2rem;
@@ -175,6 +372,26 @@
 
             .canvas-block h2 {
                 font-size: 1.5rem;
+            }
+
+            .documents-modal-content {
+                margin: 5% auto;
+                padding: 2rem;
+                width: 95%;
+            }
+
+            .documents-header h2 {
+                font-size: 2rem;
+            }
+
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .documents-close {
+                right: 15px;
+                top: 15px;
+                font-size: 28px;
             }
         }
     </style>
@@ -212,7 +429,7 @@
     <section class="canvas-hero">
         <div class="container">
             <h1><i class="fas fa-chart-line"></i> Modelo Canvas de Kochi</h1>
-            <p>Descubre cómo transformamos la planeación de citas en experiencias memorables</p>
+            <p>Solución integral para el bienestar de parejas jóvenes en Latinoamérica</p>
         </div>
     </section>
 
@@ -220,6 +437,8 @@
     <section class="canvas-content">
         <div class="container">
             <div class="intro-section">
+                <h2>Modelo de Negocio Visual</h2>
+                <p>Cómo Kochi crea, entrega y captura valor</p>
                 <a href="index.html" class="back-button">
                     <i class="fas fa-arrow-left"></i> Volver al Inicio
                 </a>
@@ -232,16 +451,30 @@
                         <span class="icon"><i class="fas fa-star"></i></span>
                         Propuesta de Valor
                     </h2>
-                    <p>Kochi es una aplicación que transforma la planeación de citas en experiencias memorables. Su propuesta no es "sugerir lugares", sino crear momentos únicos personalizados según el presupuesto, ubicación y estilo de cada pareja.</p>
+                    <p><strong>Reconexión emocional sin estigmas + experiencias memorables</strong></p>
                     
-                    <h3>Responde a tres ejes centrales:</h3>
+                    <h3>¿Qué ofrecemos?</h3>
                     <ul>
-                        <li><strong>Necesidades:</strong> muchas parejas no saben qué hacer en una cita o cómo planear algo diferente con el dinero disponible.</li>
-                        <li><strong>Frustraciones:</strong> la monotonía, el estrés de decidir, o la decepción de experiencias pasadas.</li>
-                        <li><strong>Alegrías:</strong> la app ofrece ideas originales, álbumes digitales donde las parejas guardan sus recuerdos y recomendaciones automáticas basadas en sus gustos.</li>
+                        <li>App con retos gamificados y seguimiento emocional</li>
+                        <li>Talleres presenciales de reconexión</li>
+                        <li>Kits románticos a domicilio</li>
+                        <li>Suscripción híbrida ($29K-$59K/mes)</li>
                     </ul>
                     
-                    <p>Kochi genera valor emocional: convierte el simple acto de salir en una experiencia significativa y compartible. Además, transmite confianza y cuidado al proteger datos, fomentar relaciones sanas y promover un disfrute ético del tiempo juntos.</p>
+                    <h3>Problemas que resolvemos:</h3>
+                    <ul>
+                        <li>Falta de tiempo y creatividad para planear</li>
+                        <li>Rutina y desconexión emocional</li>
+                        <li>Dificultad para comunicarse efectivamente</li>
+                        <li>Estigma de "terapia de pareja"</li>
+                    </ul>
+                    
+                    <h3>Beneficio principal:</h3>
+                    <ul>
+                        <li>Fortalecer la relación de forma práctica, divertida y accesible</li>
+                        <li>Automatización que planea por ti (10-30 min)</li>
+                        <li>Comunidad de apoyo sin juicios</li>
+                    </ul>
                 </div>
 
                 <!-- 2. Segmentos de Clientes -->
@@ -250,53 +483,93 @@
                         <span class="icon"><i class="fas fa-users"></i></span>
                         Segmentos de Clientes
                     </h2>
-                    <p>El nicho principal son jóvenes y adultos entre 18 y 35 años, activos en redes sociales, que valoran la innovación, la conexión emocional y el equilibrio entre costo y experiencia.</p>
+                    <p><strong>¿A quién servimos?</strong></p>
                     
-                    <h3>Subsegmentos:</h3>
+                    <h3>Cliente Principal:</h3>
                     <ul>
-                        <li>Parejas jóvenes con presupuestos medios o bajos que buscan ideas diferentes.</li>
-                        <li>Parejas consolidadas que desean mantener la chispa y registrar sus momentos.</li>
-                        <li>Usuarios individuales que buscan planear citas futuras o sorprender a alguien.</li>
-                        <li>Empresas locales (restaurantes, cines, cafés, experiencias urbanas) que quieren publicitar sus servicios dentro de Kochi.</li>
+                        <li><strong>Parejas 23-38 años</strong> en Colombia</li>
+                        <li>Profesionales urbanos con vida activa</li>
+                        <li>Educación media-alta, tech-savvy</li>
+                        <li>36% de la población urbana</li>
                     </ul>
                     
-                    <p>El modelo considera que los usuarios compran más por impulso y emoción que por racionalidad; por eso, cada interacción debe transmitir "confía en mí, te haré vivir algo especial".</p>
+                    <h3>¿Qué buscan?</h3>
+                    <ul>
+                        <li>Equilibrar vida profesional y emocional</li>
+                        <li>Mantener viva la conexión afectiva</li>
+                        <li>Soluciones prácticas, no terapia tradicional</li>
+                        <li>Experiencias auténticas sobre consumo material</li>
+                    </ul>
+                    
+                    <h3>Sus frustraciones:</h3>
+                    <ul>
+                        <li>No saben qué hacer juntos (falta creatividad)</li>
+                        <li>La rutina mata la conexión</li>
+                        <li>No hay tiempo para planear</li>
+                        <li>Vergüenza de ir a terapia</li>
+                    </ul>
                 </div>
 
                 <!-- 3. Canales de Distribución -->
                 <div class="canvas-block">
                     <h2>
                         <span class="icon"><i class="fas fa-share-alt"></i></span>
-                        Canales de Distribución
+                        Canales
                     </h2>
-                    <p>Kochi utilizará una estrategia omnicanal con cuatro canales principales basados en el embudo AIDA (Atención, Interés, Deseo, Acción):</p>
+                    <p><strong>¿Cómo llegamos al cliente?</strong></p>
                     
+                    <h3>Adquisición:</h3>
                     <ul>
-                        <li><strong>Redes sociales</strong> (Instagram, TikTok y Facebook Ads): contenido visual aspiracional y microvideos que despierten deseo e impulsividad.</li>
-                        <li><strong>Marketing de influencers y alianzas locales:</strong> experiencias en restaurantes o lugares que se convierten en vitrinas reales de la app.</li>
-                        <li><strong>App Store y Google Play:</strong> canal principal de descarga, con estrategia ASO (App Store Optimization).</li>
-                        <li><strong>Email marketing y notificaciones push:</strong> para reactivar usuarios, fidelizar y ofrecer nuevas experiencias personalizadas.</li>
+                        <li>Instagram, TikTok, Facebook Ads</li>
+                        <li>Marketing con influencers</li>
+                        <li>Alianzas con restaurantes y lugares</li>
+                        <li>App Store / Google Play (ASO)</li>
                     </ul>
                     
-                    <p>En todas las etapas del funnel se prioriza la generación de confianza y la experiencia emocional, no solo la venta.</p>
+                    <h3>Retención:</h3>
+                    <ul>
+                        <li>Notificaciones push personalizadas</li>
+                        <li>Email marketing emocional</li>
+                        <li>Comunidad en la app</li>
+                    </ul>
+                    
+                    <h3>Formato:</h3>
+                    <ul>
+                        <li>Digital: app móvil + contenido en redes</li>
+                        <li>Físico: talleres presenciales + kits a domicilio</li>
+                    </ul>
                 </div>
 
                 <!-- 4. Relación con los Clientes -->
                 <div class="canvas-block">
                     <h2>
                         <span class="icon"><i class="fas fa-handshake"></i></span>
-                        Relación con los Clientes
+                        Relación con Clientes
                     </h2>
-                    <p>La relación se centrará en acompañar y cuidar al usuario, construyendo una comunidad de experiencias.</p>
+                    <p><strong>¿Qué tipo de relación mantenemos?</strong></p>
                     
+                    <h3>Tipo de relación:</h3>
                     <ul>
-                        <li><strong>Fidelización:</strong> sistema de recompensas por subir fotos o calificar citas ("Kochi Points").</li>
-                        <li><strong>Personalización:</strong> recomendaciones automáticas según historial y emociones registradas.</li>
-                        <li><strong>Atención humana y empática:</strong> soporte 24/7 basado en lenguaje afectivo y no utilitarista.</li>
-                        <li><strong>Comunidades Kochi:</strong> espacio para compartir experiencias o retos ("La cita del mes"), fortaleciendo la conexión emocional con la marca.</li>
+                        <li><strong>Acompañamiento personalizado</strong> (no autoservicio)</li>
+                        <li>Comunidad de apoyo mutuo</li>
+                        <li>Asesoría con psicólogos certificados</li>
                     </ul>
                     
-                    <p>La meta no es solo que el usuario vuelva, sino que sienta que Kochi crece con su relación.</p>
+                    <h3>Cómo:</h3>
+                    <ul>
+                        <li>Gamificación: puntos, retos, logros</li>
+                        <li>Recomendaciones automáticas según estilo</li>
+                        <li>Notificaciones motivacionales</li>
+                        <li>Reportes de progreso emocional</li>
+                        <li>Espacio para compartir experiencias</li>
+                    </ul>
+                    
+                    <h3>Medimos con:</h3>
+                    <ul>
+                        <li>NPS mensual</li>
+                        <li>Encuestas de bienestar</li>
+                        <li>Análisis de uso y engagement</li>
+                    </ul>
                 </div>
 
                 <!-- 5. Fuentes de Ingreso -->
@@ -305,16 +578,28 @@
                         <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                         Fuentes de Ingreso
                     </h2>
-                    <p>Kochi contará con al menos cuatro vías de monetización:</p>
+                    <p><strong>¿Cómo ganamos dinero?</strong></p>
                     
+                    <h3>Principales:</h3>
                     <ul>
-                        <li><strong>Publicidad geolocalizada:</strong> restaurantes, bares y espacios pagan por aparecer en recomendaciones locales.</li>
-                        <li><strong>Suscripción Premium:</strong> acceso a ideas exclusivas, filtros personalizados, álbumes ilimitados y experiencias sorpresa.</li>
-                        <li><strong>Anuncios dentro de la aplicación:</strong> espacios publicitarios no invasivos en el feed y en las recomendaciones, cuidadosamente diseñados para integrarse con la experiencia visual y emocional del usuario. Se priorizarán marcas afines al concepto de bienestar, ocio y relaciones.</li>
-                        <li><strong>Venta de datos anónimos de tendencias (ética del cuidado):</strong> estadísticas sobre hábitos de ocio y consumo compartidas responsablemente con empresas asociadas.</li>
+                        <li><strong>Suscripción mensual:</strong> $29K-$59K/mes (acceso premium)</li>
+                        <li><strong>Publicidad local:</strong> restaurantes, bares, eventos</li>
+                        <li><strong>Venta de kits físicos:</strong> experiencias a domicilio</li>
+                        <li><strong>Talleres presenciales:</strong> pago por evento</li>
                     </ul>
                     
-                    <p>Con el tiempo, se puede incluir merchandising digital, como álbumes físicos o kits de experiencias.</p>
+                    <h3>Secundarios:</h3>
+                    <ul>
+                        <li>Anuncios in-app (no invasivos)</li>
+                        <li>Datos anónimos de tendencias (ético)</li>
+                        <li>Merchandising (futuro)</li>
+                    </ul>
+                    
+                    <h3>Modelo:</h3>
+                    <ul>
+                        <li>Freemium: básico gratis + premium de pago</li>
+                        <li>Ingresos recurrentes (suscripciones)</li>
+                    </ul>
                 </div>
 
                 <!-- 6. Recursos Clave -->
@@ -323,14 +608,31 @@
                         <span class="icon"><i class="fas fa-cubes"></i></span>
                         Recursos Clave
                     </h2>
+                    <p><strong>¿Qué necesitamos para funcionar?</strong></p>
+                    
+                    <h3>Tecnología:</h3>
                     <ul>
-                        <li><strong>Recursos materiales:</strong> servidores, licencias de software, infraestructura tecnológica y bases de datos seguras.</li>
-                        <li><strong>Recursos humanos:</strong> desarrolladores, diseñadores UX/UI, equipo de marketing emocional, analistas de datos y equipo de atención empática.</li>
-                        <li><strong>Recursos financieros:</strong> capital semilla, inversión ángel o crowdfunding inicial para desarrollo y expansión.</li>
-                        <li><strong>Recursos intelectuales:</strong> algoritmos de recomendación, identidad de marca, derechos del software y contenido propio.</li>
+                        <li>App móvil (iOS + Android)</li>
+                        <li>Servidores y bases de datos seguras</li>
+                        <li>Algoritmo de recomendaciones</li>
+                        <li>Sistema de gamificación</li>
                     </ul>
                     
-                    <p>Todos estos recursos deben sostener una cultura interna basada en la ética del cuidado, donde las decisiones no se tomen solo por rentabilidad, sino por bienestar colectivo.</p>
+                    <h3>Personas:</h3>
+                    <ul>
+                        <li>Desarrolladores y diseñadores UX/UI</li>
+                        <li>Psicólogos certificados</li>
+                        <li>Marketing y community managers</li>
+                        <li>Analistas de datos</li>
+                    </ul>
+                    
+                    <h3>Intangibles:</h3>
+                    <ul>
+                        <li>Marca Kochi (símbolo nutria)</li>
+                        <li>Base de datos de experiencias</li>
+                        <li>Contenido emocional propio</li>
+                        <li>Red de aliados locales</li>
+                    </ul>
                 </div>
 
                 <!-- 7. Actividades Clave -->
@@ -339,16 +641,35 @@
                         <span class="icon"><i class="fas fa-tasks"></i></span>
                         Actividades Clave
                     </h2>
+                    <p><strong>¿Qué debemos hacer bien?</strong></p>
+                    
+                    <h3>Desarrollo:</h3>
                     <ul>
-                        <li>Diseño, desarrollo y mantenimiento de la app.</li>
-                        <li>Creación de experiencias nuevas y contenido emocional atractivo.</li>
-                        <li>Gestión de alianzas con comercios locales.</li>
-                        <li>Estrategias de marketing y funnel AIDA continuo.</li>
-                        <li>Análisis de datos para personalizar y fidelizar.</li>
-                        <li>Garantizar la protección y confidencialidad de la información de los usuarios.</li>
+                        <li>Crear y mantener la app</li>
+                        <li>Mejorar algoritmo de personalización</li>
+                        <li>Garantizar seguridad de datos</li>
                     </ul>
                     
-                    <p>El corazón de la operación es generar experiencias auténticas y sostenibles.</p>
+                    <h3>Contenido:</h3>
+                    <ul>
+                        <li>Diseñar retos y experiencias nuevas</li>
+                        <li>Crear contenido emocional (videos, guías)</li>
+                        <li>Curar kits físicos románticos</li>
+                    </ul>
+                    
+                    <h3>Marketing:</h3>
+                    <ul>
+                        <li>Campañas en redes sociales</li>
+                        <li>Gestionar comunidad y engagement</li>
+                        <li>Análisis de datos y personalización</li>
+                    </ul>
+                    
+                    <h3>Operaciones:</h3>
+                    <ul>
+                        <li>Gestionar alianzas con negocios locales</li>
+                        <li>Organizar talleres presenciales</li>
+                        <li>Soporte y asesoría psicológica</li>
+                    </ul>
                 </div>
 
                 <!-- 8. Socios Clave -->
@@ -357,15 +678,34 @@
                         <span class="icon"><i class="fas fa-link"></i></span>
                         Socios Clave
                     </h2>
+                    <p><strong>¿Con quién colaboramos?</strong></p>
+                    
+                    <h3>Experiencias locales:</h3>
                     <ul>
-                        <li><strong>Restaurantes, bares, cines y centros recreativos:</strong> aliados estratégicos para crear experiencias reales.</li>
-                        <li><strong>Influencers y creadores de contenido:</strong> difusión y validación social.</li>
-                        <li><strong>Empresas de desarrollo tecnológico:</strong> soporte y escalabilidad.</li>
-                        <li><strong>Entidades financieras o inversionistas éticos:</strong> sostenimiento y crecimiento responsable.</li>
-                        <li><strong>Organizaciones promotoras de bienestar y relaciones sanas:</strong> refuerzo del enfoque ético y de cuidado emocional.</li>
+                        <li>Restaurantes y bares</li>
+                        <li>Cines y centros recreativos</li>
+                        <li>Proveedores de kits románticos</li>
                     </ul>
                     
-                    <p>Estos socios fortalecen la credibilidad, el alcance y la sostenibilidad del proyecto.</p>
+                    <h3>Contenido y validación:</h3>
+                    <ul>
+                        <li>Psicólogos certificados</li>
+                        <li>Influencers y creadores</li>
+                        <li>ONGs de bienestar emocional</li>
+                    </ul>
+                    
+                    <h3>Tecnología e infraestructura:</h3>
+                    <ul>
+                        <li>Empresas de desarrollo tech</li>
+                        <li>Proveedores de hosting y seguridad</li>
+                        <li>Plataformas de pago (PSE, tarjetas)</li>
+                    </ul>
+                    
+                    <h3>Financiamiento:</h3>
+                    <ul>
+                        <li>Inversionistas ángel</li>
+                        <li>Capital semilla / crowdfunding</li>
+                    </ul>
                 </div>
 
                 <!-- 9. Estructura de Costos -->
@@ -374,19 +714,45 @@
                         <span class="icon"><i class="fas fa-calculator"></i></span>
                         Estructura de Costos
                     </h2>
-                    <p>Principales costos fijos y variables:</p>
+                    <p><strong>¿En qué gastamos?</strong></p>
                     
+                    <h3>Costos Fijos:</h3>
                     <ul>
-                        <li>Desarrollo tecnológico y mantenimiento de la app.</li>
-                        <li>Campañas publicitarias digitales (AIDA).</li>
-                        <li>Sueldos del equipo humano.</li>
-                        <li>Alianzas, comisiones y licencias.</li>
-                        <li>Infraestructura tecnológica y seguridad de datos.</li>
-                        <li>Creación de contenido y experiencias.</li>
+                        <li>Salarios del equipo (devs, psicólogos, marketing)</li>
+                        <li>Servidores y hosting</li>
+                        <li>Licencias de software</li>
+                        <li>Oficina y administrativos</li>
                     </ul>
                     
-                    <p>El modelo debe establecer un punto de equilibrio sostenible entre inversión en experiencia y retorno en fidelización. El valor no está en vender, sino en construir comunidad y emoción.</p>
+                    <h3>Costos Variables:</h3>
+                    <ul>
+                        <li>Publicidad digital (Instagram, TikTok, Google)</li>
+                        <li>Comisiones a aliados</li>
+                        <li>Producción y envío de kits físicos</li>
+                        <li>Organización de talleres</li>
+                        <li>Creación de contenido nuevo</li>
+                    </ul>
+                    
+                    <h3>Principales egresos:</h3>
+                    <ul>
+                        <li><strong>Desarrollo inicial:</strong> MVP con Figma</li>
+                        <li><strong>Marketing:</strong> adquisición de usuarios</li>
+                        <li><strong>Operaciones:</strong> kits + talleres + comisiones</li>
+                        <li><strong>Personal:</strong> equipo core</li>
+                    </ul>
+                    
+                    <h3>Estrategia:</h3>
+                    <ul>
+                        <li>Bajo costo marginal (app digital escalable)</li>
+                        <li>Ingresos recurrentes vs costos fijos</li>
+                        <li>MVP antes de escalar</li>
+                    </ul>
+                    <a href="costos.html" class="back-button" style="margin-top:10px">
+                        <i class="fas fa-chart-bar"></i> Ver detalle de costos
+                    </a>
                 </div>
+
+                
             </div>
 
             <div class="intro-section">
@@ -411,7 +777,7 @@
                     <p>Conecta corazones, descubre tu cita ideal y crea momentos inolvidables que recordarás por siempre</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/kochi.app/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.tiktok.com/@kochi.app?_r=1&_t=ZS-91LSXTmnQEZ" target="_blank"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -423,11 +789,11 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Documentos</h4>
+                    <h4>Descarga</h4>
                     <ul>
-                        <li><a href="canvas.html">Modelo Canvas</a></li>
-                        <li><a href="proximamente.html">Plan de Negocios</a></li>
-                        <li><a href="proximamente.html">Documentación</a></li>
+                        <li><a href="#" id="openDocuments">Documentos</a></li>
+                        <li><a href="proximamente.html">Recursos</a></li>
+                        <li><a href="proximamente.html">Prensa</a></li>
                     </ul>
                 </div>
             </div>
@@ -436,6 +802,66 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de Documentos -->
+    <div id="documentsModal" class="documents-modal">
+        <div class="documents-modal-content">
+            <span class="documents-close">&times;</span>
+            <div class="documents-header">
+                <div class="documents-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h2>Documentos de Kochi</h2>
+                <p>Accede a toda nuestra documentación oficial</p>
+            </div>
+            <div class="documents-grid">
+                <a href="canvas.html" class="document-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Modelo Canvas</h3>
+                    <p>Nuestro modelo de negocio completo</p>
+                    <span class="doc-badge web">Ver en web</span>
+                </a>
+                
+                <a href="assets/Kochietica.pdf" target="_blank" class="document-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Código de Ética</h3>
+                    <p>Principios y valores de Kochi</p>
+                    <span class="doc-badge pdf">Ver PDF</span>
+                </a>
+                
+                <a href="etica.html#visor-rs" class="document-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Responsabilidad Social</h3>
+                    <p>Matriz y compromisos sociales</p>
+                    <span class="doc-badge web">Ver en web</span>
+                </a>
+                
+                <a href="https://kochiapp.my.canva.site/" target="_blank" class="document-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Propuesta de Valor</h3>
+                    <p>Detalle de nuestra propuesta única</p>
+                    <span class="doc-badge web">Ver en web</span>
+                </a>
+                
+                <a href="costos.html" class="document-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Estructura de Costos</h3>
+                    <p>Análisis financiero detallado</p>
+                    <span class="doc-badge web">Ver en web</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
